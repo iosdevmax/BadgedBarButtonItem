@@ -18,13 +18,28 @@ UIBarButtonItem with a customizable badge for iOS applications
     self.navigationItem.rightBarButtonItem = btn
 ```
 
-4. Set the badge with a value
+4. Customise badge appearance
+
+ - Set a tint color
+```
+   btn.badgeTintColor = .blue
+```
+ - Set a text color
+```
+   btn.badgeTextColor = .yellow
+```
+ - Set badge position (left or right)
+```
+   btn.position = .left
+```
+
+5. Set the badge with a value
 
 ```
     btn.setBadge(with: 1)
 ```
 
-5. Add an action to the button
+6. Add an action to the button
 
 ```
     btn.tapAction = {
