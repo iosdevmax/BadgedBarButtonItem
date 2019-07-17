@@ -13,6 +13,13 @@ enum BadgePosition {
     case right
 }
 
+enum BadgeSize {
+    case extraSmall
+    case small
+    case medium
+    case large
+}
+
 class BadgedButtonItem: UIBarButtonItem {
     
     public func setBadge(with value: Int) {
@@ -34,9 +41,44 @@ class BadgedButtonItem: UIBarButtonItem {
     public var position: BadgePosition? = .right {
         didSet {
             if position == .left {
-                self.lblBadge.frame.origin = CGPoint.zero
+                self.lblBadge.frame = CGRect(x: 0,
+                                             y: 0,
+                                             width: badgeRadius * 2,
+                                             height: badgeRadius * 2)
             } else {
-                self.lblBadge.frame.origin = CGPoint(x: 20, y: 0)
+                self.lblBadge.frame = CGRect(x: filterBtn.frame.maxX - badgeRadius * 2,
+                                             y: 0,
+                                             width: badgeRadius * 2,
+                                             height: badgeRadius * 2)
+            }
+        }
+    }
+    
+    public var hasBorder: Bool? {
+        didSet {
+            if hasBorder == true {
+                lblBadge.layer.borderWidth = 1.0
+            }
+        }
+    }
+    
+    public var borderColor: UIColor? = .black {
+        didSet {
+            lblBadge.layer.borderColor = borderColor?.cgColor
+        }
+    }
+    
+    public var badgeSize: BadgeSize = .medium {
+        didSet {
+            switch badgeSize {
+            case .extraSmall:
+                self.badgeRadius = 6.0
+            case .small:
+                self.badgeRadius = 7.0
+            case .medium:
+                self.badgeRadius = 8.0
+            case .large:
+                self.badgeRadius = 9.0
             }
         }
     }
@@ -45,6 +87,14 @@ class BadgedButtonItem: UIBarButtonItem {
         didSet {
             if let value = badgeValue,
                 value > 0 {
+                
+                // reducing font size if the value has two digits
+                if "\(value)".count > 1 {
+                    lblBadge.font = UIFont.systemFont(ofSize: twoDigitsFontSize)
+                } else {
+                    lblBadge.font = UIFont.systemFont(ofSize: oneDigitFontSize)
+                }
+                
                 lblBadge.isHidden = false
                 lblBadge.text = "\(value)"
             } else {
@@ -57,6 +107,18 @@ class BadgedButtonItem: UIBarButtonItem {
     
     private let filterBtn = UIButton()
     private let lblBadge = UILabel()
+    private var badgeRadius: CGFloat = 8.0 {
+        didSet {
+            self.lblBadge.layer.cornerRadius = badgeRadius
+        }
+    }
+    
+    private var oneDigitFontSize: CGFloat {
+        return badgeRadius + 1
+    }
+    private var twoDigitsFontSize: CGFloat {
+        return badgeRadius
+    }
     
     override init() {
         super.init()
@@ -80,15 +142,18 @@ class BadgedButtonItem: UIBarButtonItem {
         self.filterBtn.setImage(image, for: .normal)
         self.filterBtn.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
-        self.lblBadge.frame = CGRect(x: 20, y: 0, width: 15, height: 15)
+        self.lblBadge.frame = CGRect(x: filterBtn.frame.maxX - badgeRadius * 2,
+                                     y: 0,
+                                     width: badgeRadius * 2,
+                                     height: badgeRadius * 2)
         self.lblBadge.backgroundColor = .red
         self.lblBadge.clipsToBounds = true
-        self.lblBadge.layer.cornerRadius = 7
+        self.lblBadge.layer.cornerRadius = badgeRadius
         self.lblBadge.textColor = .white
         self.lblBadge.font = UIFont.systemFont(ofSize: 10)
         self.lblBadge.textAlignment = .center
         self.lblBadge.isHidden = true
-        self.lblBadge.minimumScaleFactor = 0.1
+        self.lblBadge.minimumScaleFactor = 0.5
         self.lblBadge.adjustsFontSizeToFitWidth = true
         self.filterBtn.addSubview(lblBadge)
         self.customView = filterBtn
