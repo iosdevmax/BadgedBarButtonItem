@@ -8,19 +8,19 @@
 
 import UIKit
 
-enum BadgePosition {
+public enum BadgePosition {
     case left
     case right
 }
 
-enum BadgeSize {
+public enum BadgeSize {
     case extraSmall
     case small
     case medium
     case large
 }
 
-class BadgedButtonItem: UIBarButtonItem {
+public class BadgedButtonItem: UIBarButtonItem {
     
     public func setBadge(with value: Int) {
         self.badgeValue = value
