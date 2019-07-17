@@ -8,10 +8,37 @@
 
 import UIKit
 
+enum BadgePosition {
+    case left
+    case right
+}
+
 class BadgedButtonItem: UIBarButtonItem {
     
     public func setBadge(with value: Int) {
         self.badgeValue = value
+    }
+    
+    public var badgeTintColor: UIColor? {
+        didSet {
+            lblBadge.backgroundColor = badgeTintColor
+        }
+    }
+    
+    public var badgeTextColor: UIColor? {
+        didSet {
+            lblBadge.textColor = badgeTextColor
+        }
+    }
+    
+    public var position: BadgePosition? = .right {
+        didSet {
+            if position == .left {
+                self.lblBadge.frame.origin = CGPoint.zero
+            } else {
+                self.lblBadge.frame.origin = CGPoint(x: 20, y: 0)
+            }
+        }
     }
     
     private var badgeValue: Int? {
@@ -57,7 +84,7 @@ class BadgedButtonItem: UIBarButtonItem {
         self.lblBadge.backgroundColor = .red
         self.lblBadge.clipsToBounds = true
         self.lblBadge.layer.cornerRadius = 7
-        self.lblBadge.textColor = UIColor.white
+        self.lblBadge.textColor = .white
         self.lblBadge.font = UIFont.systemFont(ofSize: 10)
         self.lblBadge.textAlignment = .center
         self.lblBadge.isHidden = true

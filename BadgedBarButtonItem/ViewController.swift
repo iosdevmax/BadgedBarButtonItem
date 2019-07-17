@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btn.badgeTextColor = .black
+        btn.badgeTintColor = .yellow
+        btn.position = .left
+        
         self.navigationItem.rightBarButtonItem = btn
         
         btn.tapAction = {
