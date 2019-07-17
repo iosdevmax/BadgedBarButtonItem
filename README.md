@@ -15,20 +15,20 @@ UIBarButtonItem with a customizable badge for iOS applications
 3. Add the button to the navigation bar
 
 ```
-        self.navigationItem.rightBarButtonItem = btn
+    self.navigationItem.rightBarButtonItem = btn
 ```
 
 4. Set the badge with a value
 
 ```
-        btn.setBadge(with: 1)
+    btn.setBadge(with: 1)
 ```
 
 5. Add an action to the button
 
 ```
-        btn.tapAction = {
-        // do something
+    btn.tapAction = {
+    // do something
         
-        }
+    }
 ```
