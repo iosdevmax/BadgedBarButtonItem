@@ -20,20 +20,14 @@ UIBarButtonItem with a customizable badge for iOS applications
 
 4. Customise badge appearance
 
- - Set a tint color
-```
-   btn.badgeTintColor = .blue
-```
- - Set a text color
-```
-   btn.badgeTextColor = .yellow
-```
- - Set badge position (left or right)
-```
-   btn.position = .left
-```
-
-5. Set the badge with a value
+ - Set a tint color ```btn.badgeTintColor = .blue```
+ - Set a text color ```btn.badgeTextColor = .yellow```
+ - Set badge position (left or right) ```btn.position = .left```
+ - Add a border to the badge ```btn.hasBorder = true```
+ - Set badge border color ```btn.borderColor = .red```
+ - Set bagde size ```btn.badgeSize = .medium```
+ 
+5. Set the badge with a value 
 
 ```
     btn.setBadge(with: 1)
