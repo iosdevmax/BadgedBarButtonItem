@@ -10,11 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let btn = BadgedButtonItem(with: UIImage(named: "cart"))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        self.navigationItem.rightBarButtonItem = btn
+        
+        btn.tapAction = {
+            self.btn.setBadge(with: 1)
+        }
+        
     }
-
 
 }
 
