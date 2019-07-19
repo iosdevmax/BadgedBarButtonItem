@@ -22,7 +22,7 @@ public enum BadgeSize {
 
 public class BadgedButtonItem: UIBarButtonItem {
     
-    public func setBadge(with value: Int) {
+    public func setBadge(with value: Int?) {
         self.badgeValue = value
     }
     
@@ -139,7 +139,7 @@ public class BadgedButtonItem: UIBarButtonItem {
         
         self.filterBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         self.filterBtn.adjustsImageWhenHighlighted = false
-        self.filterBtn.setImage(image, for: .normal)
+        self.filterBtn.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.filterBtn.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
         self.lblBadge.frame = CGRect(x: filterBtn.frame.maxX - badgeRadius * 2,
