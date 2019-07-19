@@ -26,6 +26,7 @@ UIBarButtonItem with a customizable badge for iOS applications
  - Add a border to the badge ```btn.hasBorder = true```
  - Set badge border color ```btn.borderColor = .red```
  - Set bagde size ```btn.badgeSize = .medium```
+ - Set badge animation ```btn.badgeAnimation = true```
  
 5. Set the badge with a value 
 
