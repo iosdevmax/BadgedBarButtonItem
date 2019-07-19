@@ -83,6 +83,14 @@ public class BadgedButtonItem: UIBarButtonItem {
         }
     }
     
+    public var badgeAnimation: Bool? = false {
+        didSet {
+            self.isAnimated = badgeAnimation
+        }
+    }
+    
+    public var tapAction: (() -> Void)?
+    
     private var badgeValue: Int? {
         didSet {
             if let value = badgeValue,
@@ -97,16 +105,17 @@ public class BadgedButtonItem: UIBarButtonItem {
                 
                 lblBadge.isHidden = false
                 lblBadge.text = "\(value)"
+                animateBadge(isAnimated)
             } else {
                 lblBadge.isHidden = true
             }
         }
     }
     
-    var tapAction: (() -> Void)?
     
     private let filterBtn = UIButton()
     private let lblBadge = UILabel()
+    private var isAnimated: Bool? = false
     private var badgeRadius: CGFloat = 8.0 {
         didSet {
             self.lblBadge.layer.cornerRadius = badgeRadius
@@ -159,9 +168,31 @@ public class BadgedButtonItem: UIBarButtonItem {
         self.customView = filterBtn
     }
     
-    @objc func buttonPressed() {
+    @objc private func buttonPressed() {
         if let action = tapAction {
             action()
+        }
+    }
+    
+    private func animateBadge(_ animate: Bool?) {
+        guard animate == true else { return }
+        lblBadge.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 3,
+                       options: [.curveLinear],
+                       animations: { [weak self] in
+                        
+            guard let strongSelf = self else { return }
+            strongSelf.lblBadge.transform = .identity
+                        
+        }) { [weak self] (finished) in
+            
+            guard let strongSelf = self else { return }
+            if !finished {
+                strongSelf.lblBadge.transform = .identity
+            }
         }
     }
     
