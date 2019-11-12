@@ -17,13 +17,25 @@ UIBarButtonItem with a customizable badge for iOS applications
 ```
     self.navigationItem.rightBarButtonItem = btn
 ```
+<img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot1.png" width="640px" />
 
 4. Customise badge appearance
 
  - Set a tint color ```btn.badgeTintColor = .blue```
- - Set a text color ```btn.badgeTextColor = .yellow```
+ <img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot2.png" width="640px" />
+ 
+ - Set a text color ```btn.badgeTextColor = .green```
+  <img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot3.png" width="640px" />
+  
  - Set badge position (left or right) ```btn.position = .left```
+  <img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot4.png" width="640px" />
+
  - Add a border to the badge ```btn.hasBorder = true```
+  <img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot5.png" width="640px" />
+  
+ - Remove a border from the badge ```btn.hasBorder = false```
+  <img src="https://raw.githubusercontent.com/Syngmaster/BadgedBarButtonItem/master/Screenshots/screenshot6.png" width="640px" />
+
  - Set badge border color ```btn.borderColor = .red```
  - Set bagde size ```btn.badgeSize = .medium```
  - Set badge animation ```btn.badgeAnimation = true```
