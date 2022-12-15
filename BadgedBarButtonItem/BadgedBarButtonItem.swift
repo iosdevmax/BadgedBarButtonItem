@@ -148,7 +148,8 @@ public class BadgedButtonItem: UIBarButtonItem {
         
         self.filterBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         self.filterBtn.adjustsImageWhenHighlighted = false
-        self.filterBtn.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        let scaledImage = UIImage.imageWithImage(image, scaledToSize: CGSize(width: 20, height: 20))
+        self.filterBtn.setImage(scaledImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.filterBtn.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
         self.lblBadge.frame = CGRect(x: filterBtn.frame.maxX - badgeRadius * 2,
@@ -196,4 +197,16 @@ public class BadgedButtonItem: UIBarButtonItem {
         }
     }
     
+}
+
+/// Takes an image and returns a new one identical but resized.
+private extension UIImage {
+    static func imageWithImage(_ image: UIImage?, scaledToSize newSize: CGSize) -> UIImage? {
+        guard let image = image else { return nil }
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }
